@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="C:\WEB1\PROJET WEB1\Pages_CSS\CSS.css" rel="stylesheet">
+        <link href="C:\WEB1\PROJET WEB1\Pages_CSS\bootstrap.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+         
+        }
+        .quiz-container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options {
+            list-style: none;
+            padding: 0;
+        }
+        .options li {
+            margin-bottom: 10px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar bg-body-tertiary" style="background-color: rgb(222, 235, 246) !important;">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="C:\WEB1\PROJET WEB1\Pages_HTML\Index.html">
+                <img src="C:\WEB1\PROJET WEB1\images\home2-removebg-preview.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                Home
+              </a>
+                <a class="navbar-brand" href="C:\WEB1\PROJET WEB1\Pages_HTML\Parcours.html">
+                  <img src="C:\WEB1\PROJET WEB1\images\parcours2.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                  Parcours
+                </a>
+                <a class="navbar-brand" href="C:\WEB1\PROJET WEB1\Pages_HTML\Competences.html">
+                  <img src="C:\WEB1\PROJET WEB1\images\competences3.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                  Compétences
+                </a>
+                <a class="navbar-brand" href="C:\WEB1\PROJET WEB1\Pages_HTML\Projets.html">
+                    <img src="C:\WEB1\PROJET WEB1\images\stages.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    Projets
+                  </a>
+                  <a class="navbar-brand" href="C:\WEB1\PROJET WEB1\Pages_HTML\Interet.html">
+                    <img src="C:\WEB1\PROJET WEB1\images\interet.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    Centre d'intérêt
+                  </a>
+                  <a class="navbar-brand" href="C:\WEB1\PROJET WEB1\Pages_HTML\Quiz.html">
+                    <img src="C:\WEB1\PROJET WEB1\images\quiz.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                    Quiz
+                  </a>
+            </div>
+          </nav>
+        </header>
+        <br>
+        <br>
+    <div class="quiz-container" style="background-color: rgb(222, 235, 246); padding: 20px;">
+        <h1 style="text-align: center;">Quiz : Quelle est la bonne réponse ?</h1>
+        <div id="quiz" class="quiz-grid">
+            <!-- Les questions seront insérées ici -->
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="style" id="submit" style="padding: 10px 20px; font-size: 16px; color: black; border: 2px black; width: 180px; height: 50px;">Valider</button>
+        </div>
+        <div id="result" class="result" style="text-align: center; margin-top: 20px;"></div>
+    </div>
+    <div id="overlay"></div>
+<div id="result-modal">
+    <h3>Résultats</h3>
+    <p id="score"></p>
+    <ul id="correct-answers"></ul>
+    <button  id="close-modal" style="background-color: #8babc2; color: black; margin-left: 450px ; " >Fermer</button>
+</div>
+
+<br>
+<br>
+    <style>
+        #result-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 600px;
+    z-index: 1000;
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.close-btn {
+    cursor: pointer;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 10px;
+}
+
+.close-btn:hover {
+    background-color: #b02a37;
+}
+
+        .quiz-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .quiz-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        ul.options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul.options li {
+            margin-bottom: 8px;
+        }
+
+        button {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+<script>// Questions du quiz
+    const quizData = [
+    { question: "Quelle balise est utilisée pour insérer une image en HTML ?", options: ["&lt;img&gt;", "&lt;src&gt;", "&lt;image&gt;", "&lt;pic&gt;"], correct: 0 },
+    { question: "Quelle propriété CSS permet de changer la couleur de fond ?", options: ["background-color", "color", "border", "font-size"], correct: 0 },
+    { question: "Quel est le langage utilisé pour rendre une page web interactive ?", options: ["JavaScript", "CSS", "HTML", "Python"], correct: 0 },
+    { question: "Quelle balise HTML est utilisée pour créer un lien hypertexte ?", options: ["&lt;a&gt;", "&lt;link&gt;", "&lt;href&gt;", "&lt;url&gt;"], correct: 0 },
+    { question: "Quelle propriété CSS permet d'arrondir les bordures ?", options: ["border-radius", "border-style", "corner-radius", "border-width"], correct: 0 },
+    { question: "Quel événement JavaScript est déclenché lors d'un clic sur un élément ?", options: ["onclick", "onhover", "onpress", "onload"], correct: 0 },
+    { question: "Quelle balise HTML est utilisée pour créer une liste à puces ?", options: ["&lt;ul&gt;", "&lt;ol&gt;", "&lt;li&gt;", "&lt;list&gt;"], correct: 0 },
+    { question: "Quelle propriété CSS est utilisée pour centrer un texte ?", options: ["text-align", "align-items", "justify-content", "margin"], correct: 0 },
+    { question: "Quelle méthode JavaScript est utilisée pour sélectionner un élément HTML ?", options: ["document.querySelector", "getElementByTag", "selectElement", "queryElement"], correct: 0 },
+    { question: "Quel attribut HTML est utilisé pour ajouter une classe CSS à un élément ?", options: ["class", "id", "style", "name"], correct: 0 },
+    { question: "Quel type d'élément HTML est &lt;div&gt; ?", options: ["Bloc", "Inline", "Formulaire", "Multimédia"], correct: 0 },
+    { question: "Quelle propriété CSS contrôle l'espacement interne d'un élément ?", options: ["padding", "margin", "border", "width"], correct: 0 },
+    { question: "Quelle méthode JavaScript est utilisée pour ajouter un événement à un élément ?", options: ["addEventListener", "setEvent", "onEvent", "triggerEvent"], correct: 0 },
+    { question: "Quelle balise HTML est utilisée pour insérer un tableau ?", options: ["&lt;table&gt;", "&lt;tab&gt;", "&lt;grid&gt;", "&lt;rows&gt;"], correct: 0 },
+    { question: "Quel sélecteur CSS est utilisé pour cibler un élément avec un ID spécifique ?", options: ["#", ".", ":", "::"], correct: 0 }
+ ];
+    
+    // Génération dynamique du quiz
+    const quizContainer = document.getElementById("quiz");
+    quizData.forEach((data, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "quiz-card";
+        questionDiv.innerHTML = `
+            <p class="question">${index + 1}. ${data.question}</p>
+            <ul class="options">
+                ${data.options.map((option, i) => `
+                    <li>
+                        <label>
+                            <input type="radio" name="question${index}" value="${i}">
+                            ${option}
+                        </label>
+                    </li>
+                `).join("")}
+            </ul>
+        `;
+        quizContainer.appendChild(questionDiv);
+    });
+    
+    // Validation des réponses
+    document.getElementById("submit").addEventListener("click", () => {
+        let score = 0;
+        quizData.forEach((data, index) => {
+            const selected = document.querySelector(`input[name="question${index}"]:checked`);
+            if (selected && parseInt(selected.value) === data.correct) {
+                score++;
+            }
+        });
+        const resultContainer = document.getElementById("result");
+        resultContainer.textContent = `Vous avez obtenu ${score} sur ${quizData.length}.`;
+    });
+    document.getElementById("submit").addEventListener("click", () => {
+    let score = 0;
+    const correctAnswersList = document.getElementById("correct-answers");
+    correctAnswersList.innerHTML = ""; // Réinitialise la liste
+
+    quizData.forEach((data, index) => {
+        const selected = document.querySelector(`input[name="question${index}"]:checked`);
+        if (selected && parseInt(selected.value) === data.correct) {
+            score++;
+        }
+        const listItem = document.createElement("li");
+        listItem.textContent = `${index + 1}. 
+        Réponse correcte: ${data.options[data.correct].replace(/&lt;/g, "<").replace(/&gt;/g, ">")}`;
+        // listItem.innerHTML = `${index + 1}.Réponse correcte: ${data.options[data.correct].replace(/&lt;/g, "<").replace(/&gt;/g, ">")}`;
+        correctAnswersList.appendChild(listItem);
+    });
+
+    document.getElementById("score").textContent = `Vous avez obtenu ${score} sur ${quizData.length}.`;
+
+    // Afficher le modal
+    document.getElementById("overlay").style.display = "block";
+    document.getElementById("result-modal").style.display = "block";
+});
+document.getElementById("close-modal").addEventListener("click", () => {
+    document.getElementById("overlay").style.display = "none";
+    document.getElementById("result-modal").style.display = "none";
+});
+
+    </script>
+     <footer class="footer">
+        <ul class="right">
+        <li><a href="https://www.google.com/maps/place/Dar+Bouchaala/@34.8021866,10.7271087,17z/data=!3m1!4b1!4m6!3m5!1s0x1301d3c557a8c5d3:0xf47c135d50c66eca!8m2!3d34.8021866!4d10.7271087!16s%2Fg%2F11q9_gcpt4?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3D">
+            <img class="icon" src="C:\WEB1\PROJET WEB1\images\localisation.png"></a>
+            <p class="ic"> Rte teniour, Sfax, Tunisie</p></li>
+           <li> <img class="icon" src="C:\WEB1\PROJET WEB1\images\tel.png">
+            <p class="ic"> 44 763 163</p></li>
+           <li> <a href="https://mail.google.com/mail/u/0/#inbox"><img class="icon" src="C:\WEB1\PROJET WEB1\images\gmail2.png"></a>
+            <p class="ic"> hibabouchaala2002@gmail.com</p></li>
+        </ul>
+        <ul class="right">
+          <li><a href="https://www.facebook.com/hiba.bouchaala"><img class="icon" src="C:\WEB1\PROJET WEB1\images\facebook-new.png"></a>
+            <p class="ic"> Hiba Bouchaala</p></li>  
+           <li> <a href="https://www.linkedin.com/in/hiba-bouchaala-bb49b329a/"><img class="icon" src="C:\WEB1\PROJET WEB1\images\linkedin.png"></a>
+            <p class="ic"> Hiba Bouchaala</p></li>
+        </ul>
+    </footer> 
+
+</body>
+</html>
